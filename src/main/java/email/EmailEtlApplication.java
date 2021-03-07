@@ -21,6 +21,11 @@ public class EmailEtlApplication {
     }
 
     private static void startEtl(String inputFile, String outputFile) {
+        if (inputFile.equals(outputFile)) {
+            System.err.println("Input and output file cannot be the same.");
+            System.exit(1);
+        }
+
         try (Reader reader = new FileReader(inputFile); Writer writer = new FileWriter(outputFile)) {
             new EmailEtl(reader, writer).extractTransformLoad();
         } catch (IOException e) {
