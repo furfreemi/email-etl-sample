@@ -18,7 +18,7 @@ public class EmailExtractor {
         this.reader = reader;
     }
 
-    public List<Email> read() throws IOException {
+    public List<Email> extractValid() throws IOException {
         try (BufferedReader bufferedReader = new BufferedReader(reader); Stream<String> lines = bufferedReader.lines()) {
             return lines
                     .filter(EmailValidator.getInstance()::isValid)

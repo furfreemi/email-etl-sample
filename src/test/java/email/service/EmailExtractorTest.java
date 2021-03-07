@@ -19,7 +19,7 @@ class EmailExtractorTest {
         String invalidEmail1 = "invalid.email";
         String invalidEmail2 = "invalid@email";
         Reader reader = new StringReader(String.join(System.lineSeparator(), invalidEmail1, invalidEmail2));
-        List<Email> validEmails = new EmailExtractor(reader).read();
+        List<Email> validEmails = new EmailExtractor(reader).extractValid();
 
         assertTrue(validEmails.isEmpty());
     }
@@ -31,7 +31,7 @@ class EmailExtractorTest {
         String email2 = "email2@test.example.com";
         Reader reader = new StringReader(String.join(System.lineSeparator(), email1, invalidEmail, email2));
 
-        List<Email> validEmails = new EmailExtractor(reader).read();
+        List<Email> validEmails = new EmailExtractor(reader).extractValid();
 
         assertEquals(2, validEmails.size());
         assertEquals(email1, validEmails.get(0).getEmailAddress());

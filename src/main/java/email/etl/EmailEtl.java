@@ -27,7 +27,7 @@ public class EmailEtl {
 
     public void extractTransformLoad() {
         try {
-            List<Email> emails = extractor.read();
+            List<Email> emails = extractor.extractValid();
             transformer.sort(emails);
             loader.write(emails);
         } catch (IOException e) {
