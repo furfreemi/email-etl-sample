@@ -1,6 +1,7 @@
 .gradle/
 /build/
 /out/
+sampleOutput.txt
 
 .DS_Store
 .idea/

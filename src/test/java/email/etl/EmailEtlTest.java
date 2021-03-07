@@ -1,30 +1,22 @@
 package email.etl;
 
-import email.model.Email;
-import email.service.EmailDomainSortTransformer;
-import email.service.EmailExtractor;
-import email.service.EmailLoader;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.util.List;
+import java.io.*;
 
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EmailEtlTest {
 
     @Test
-    public void transformsAndLoadsExtractedData() throws IOException {
-        EmailExtractor extractorMock = mock(EmailExtractor.class);
-        EmailDomainSortTransformer transformerMock = mock(EmailDomainSortTransformer.class);
-        EmailLoader loaderMock = mock(EmailLoader.class);
-        List<Email> expectedList = List.of(new Email("aa", "example.com"));
+    public void transformsAndLoadsExtractedData() {
+        String expectedFirst = "aaa@example.com";
+        String expectedSecond = "bbb@example.org";
+        Reader reader = new StringReader(String.join(System.lineSeparator(), expectedSecond, "invalid..@example.com", expectedFirst));
+        Writer writer = new StringWriter();
 
-        when(extractorMock.read()).thenReturn(expectedList);
+        new EmailEtl(reader, writer).extractTransformLoad();
 
-        new EmailEtl(extractorMock, transformerMock, loaderMock).extractTransformLoad();
-
-        verify(transformerMock).sort(expectedList);
-        verify(loaderMock).write(expectedList);
+        assertEquals(String.join(System.lineSeparator(), expectedFirst, expectedSecond), writer.toString());
     }
 }

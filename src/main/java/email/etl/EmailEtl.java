@@ -5,7 +5,7 @@ import email.service.EmailExtractor;
 import email.service.EmailDomainSortTransformer;
 import email.service.EmailLoader;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,10 +17,10 @@ public class EmailEtl {
     private final EmailLoader loader;
     private final Logger logger = Logger.getLogger(this.getClass().getName());
 
-    public EmailEtl(EmailExtractor extractor, EmailDomainSortTransformer transformer, EmailLoader loader) {
-        this.extractor = extractor;
-        this.transformer = transformer;
-        this.loader = loader;
+    public EmailEtl(Reader reader, Writer writer) {
+        this.extractor = new EmailExtractor(reader);
+        this.transformer = new EmailDomainSortTransformer();
+        this.loader = new EmailLoader(writer);
     }
 
     public void extractTransformLoad() {
