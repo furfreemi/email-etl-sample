@@ -1,11 +1,13 @@
 package email.etl;
 
 import email.model.Email;
-import email.service.EmailExtractor;
 import email.service.EmailDomainSortTransformer;
+import email.service.EmailExtractor;
 import email.service.EmailLoader;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

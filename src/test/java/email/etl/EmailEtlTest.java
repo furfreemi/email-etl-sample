@@ -2,7 +2,10 @@ package email.etl;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
+import java.io.Reader;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.io.Writer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
