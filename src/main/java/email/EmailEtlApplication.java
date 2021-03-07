@@ -2,9 +2,7 @@ package email;
 
 import email.etl.EmailEtl;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class EmailEtlApplication {
 
@@ -23,7 +21,7 @@ public class EmailEtlApplication {
     }
 
     private static void startEtl(String inputFile, String outputFile) {
-        try (FileReader reader = new FileReader(inputFile); FileWriter writer = new FileWriter(outputFile)) {
+        try (Reader reader = new FileReader(inputFile); Writer writer = new FileWriter(outputFile)) {
             new EmailEtl(reader, writer).extractTransformLoad();
         } catch (IOException e) {
             System.err.printf("Unable to access file: %s", e.getMessage());
