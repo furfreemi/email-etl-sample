@@ -14,6 +14,7 @@ Several assumptions were made throughout development:
 - If emails have identical domains, then a secondary sort is performed alphabetically by username
 - Invalid emails are silently ignored/filtered
 - User is not permitted to specify the same input and output file when running the application
+- If an existing output file is specified, any existing contents will be wiped
 
 ## Next steps/potential improvements
 
